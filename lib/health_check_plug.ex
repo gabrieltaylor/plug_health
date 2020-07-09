@@ -21,8 +21,8 @@ defmodule HealthCheckPlug do
   def defaults do
     [
       path: "/health",
-      respond_func: &respond/2,
-      check_func: &check/1
+      respond_func: &HealthCheckPlug.respond/2,
+      check_func: &HealthCheckPlug.check/1
     ]
   end
 
@@ -42,19 +42,19 @@ defmodule HealthCheckPlug do
 
   def call(conn, _opts), do: conn
 
-  defp respond(conn, true = _check_result) do
+  def respond(conn, true = _check_result) do
     conn
     |> put_resp_content_type("application/json", nil)
     |> send_resp(:ok, ~s({"healthy": true}))
     |> halt()
   end
 
-  defp respond(conn, false = _check_result) do
+  def respond(conn, false = _check_result) do
     conn
     |> put_resp_content_type("application/json", nil)
     |> send_resp(:service_unavailable, ~s({"healthy": false}))
     |> halt()
   end
 
-  defp check(_conn), do: true
+  def check(_conn), do: true
 end
