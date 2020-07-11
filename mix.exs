@@ -4,7 +4,7 @@ defmodule HealthCheckPlug.MixProject do
   def project do
     [
       app: :plug_health,
-      version: "0.1.1",
+      version: "0.1.2",
       elixir: "~> 1.9",
       deps: deps(),
       description: description(),
@@ -25,7 +25,7 @@ defmodule HealthCheckPlug.MixProject do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:plug, "~> 1.10"}
+      {:plug, "~> 1.5"}
     ]
   end
 
