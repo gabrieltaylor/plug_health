@@ -3,7 +3,7 @@
 Respond to health checks without needing a route or controller action.
 
 Optionally, add the health check plug in your endpoint before `Plug.Logger` in order to respond
-to health checks without adding noise your logs.
+to health checks without adding noise to your logs.
 
 ## Installation
 
