@@ -21,8 +21,8 @@ defmodule PlugHealth do
   def defaults do
     [
       path: "/health",
-      respond_func: &__MODULE__.respond/2,
-      check_func: &__MODULE__.check/1
+      check_func: &__MODULE__.check/1,
+      respond_func: &__MODULE__.respond/2
     ]
   end
 
@@ -44,6 +44,8 @@ defmodule PlugHealth do
 
   def call(conn, _opts), do: conn
 
+  def check(_conn), do: true
+
   def respond(conn, true = _check_result) do
     conn
     |> put_resp_content_type("application/json", nil)
@@ -57,6 +59,4 @@ defmodule PlugHealth do
     |> send_resp(:service_unavailable, ~s({"healthy": false}))
     |> halt()
   end
-
-  def check(_conn), do: true
 end
