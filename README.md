@@ -9,7 +9,7 @@ Add `plug_health` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:plug_health, "~> 0.1.0"}
+    {:plug_health, "~> 1.0.0"}
   ]
 end
 ```
