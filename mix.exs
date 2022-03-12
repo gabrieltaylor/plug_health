@@ -31,7 +31,7 @@ defmodule PlugHealth.MixProject do
 
   defp description do
     """
-    An elixir plug for handling health and ready endpoints
+    A plug for health check, which can be used for liveness or readiness probes.
     """
   end
 

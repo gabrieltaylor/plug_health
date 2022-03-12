@@ -1,9 +1,6 @@
 # PlugHealth
 
-Respond to health checks without needing a route or controller action.
-
-Optionally, add the health check plug in your endpoint before `Plug.Logger` in order to respond
-to health checks without adding noise to your logs.
+> A plug for health check, which can be used for liveness or readiness probes.
 
 ## Installation
 
@@ -17,14 +14,29 @@ def deps do
 end
 ```
 
-Call the plug in your `endpoint.ex`
+## Usage
+
+It's better to reduce the impact of health check on application, so it's common to add this plug to the header of the endpoint.
+
+For example:
 
 ```elixir
-plug PlugHealth, path: "/alive"
+defmodule DemoWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :demo
+
+  # Put the plug here, before anything else
+  plug PlugHealth, path: "/alive"
+end
 ```
 
-### Options
-- `path` - The request path
-- `check_func` - A function that accepts one argument: `Plug.Conn` and, by default, returns a boolean as the result.
-- `respond_func` - A function that accepts two arguments: `Plug.Conn` and the result from the `check_func`. This function
-must return a `Plug.Conn`.
+In this way, the health check request is handled as light as possible, it won't pass through unnecessary plugs, such as request logger, route and controller, etc.
+
+## Options
+
+- `path` - the request path
+- `check_func` - a function:
+  - accepts one argument: `%Plug.Conn{}`.
+  - returns a boolean as the result.
+- `respond_func` - a function:
+  - accepts two arguments: `%Plug.Conn{}` and the result from the `check_func`.
+  - returns a `%Plug.Conn{}`.
