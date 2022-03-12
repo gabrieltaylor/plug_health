@@ -40,3 +40,8 @@ In this way, the health check request is handled as light as possible, it won't 
 - `respond_func` - a function:
   - accepts two arguments: `%Plug.Conn{}` and the result from the `check_func`.
   - returns a `%Plug.Conn{}`.
+
+
+## License
+
+[MIT](./LICENSE)
