@@ -1,4 +1,4 @@
-defmodule HealthCheckPlug do
+defmodule PlugHealth do
   @moduledoc """
   Respond to ready and alive checks
 
@@ -9,8 +9,8 @@ defmodule HealthCheckPlug do
 
   ## Examples
   ```
-  plug HealthCheckPlug, path: "/alivez"
-  plug HealthCheckPlug, path: "/readyz"
+  plug PlugHealth, path: "/alivez"
+  plug PlugHealth, path: "/readyz"
   ```
   """
 
@@ -21,8 +21,8 @@ defmodule HealthCheckPlug do
   def defaults do
     [
       path: "/health",
-      respond_func: &HealthCheckPlug.respond/2,
-      check_func: &HealthCheckPlug.check/1
+      respond_func: &__MODULE__.respond/2,
+      check_func: &__MODULE__.check/1
     ]
   end
 
@@ -36,7 +36,9 @@ defmodule HealthCheckPlug do
       true ->
         result = opts[:check_func].(conn)
         opts[:respond_func].(conn, result)
-      false -> conn
+
+      false ->
+        conn
     end
   end
 

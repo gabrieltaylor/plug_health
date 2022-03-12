@@ -1,4 +1,4 @@
-# HealthCheckPlug
+# PlugHealth
 
 Respond to health checks without needing a route or controller action.
 
@@ -20,7 +20,7 @@ end
 Call the plug in your `endpoint.ex`
 
 ```elixir
-plug HealthCheckPlug, path: "/alive"
+plug PlugHealth, path: "/alive"
 ```
 
 ### Options
@@ -28,4 +28,3 @@ plug HealthCheckPlug, path: "/alive"
 - `check_func` - A function that accepts one argument: `Plug.Conn` and, by default, returns a boolean as the result.
 - `respond_func` - A function that accepts two arguments: `Plug.Conn` and the result from the `check_func`. This function
 must return a `Plug.Conn`.
-
